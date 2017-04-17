@@ -23,11 +23,11 @@ def get_vpn_login_info():
         for box in findBox:
             user = box.find_all('li')[7].text.replace('Username: ', '')
             paswd = box.find_all('li')[8].text.replace('Password: ', '')
-            print(cr.Back.GREEN + 'Current Username and Password obtained!!')
+            print(cr.Fore.GREEN + 'Current Username and Password obtained!!')
             return user, paswd
     except:
         #  Second attempt to gain information on different page because the first attempt failed
-        print(cr.Back.RED + "Unable to obtain Username and Password. :`(")
+        print(cr.Fore.RED + "Unable to obtain Username and Password. :`(")
         try_alt_way = input("Would you like to try another way? (y/n) ")
         if try_alt_way == 'n':
             sys.exit()
@@ -48,17 +48,17 @@ def get_vpn_login_info():
                         if 'paswd_alt' not in li_dict:
                             li_dict['paswd_alt'] = li.find_all('li')[8].text.replace('Password: ', '')
                 if 'user_alt' in li_dict and 'paswd_alt' in li_dict:
-                    print(cr.Back.GREEN + 'Current Username and Password obtained!!')
+                    print(cr.Fore.GREEN + 'Current Username and Password obtained!!')
                     return li_dict['user_alt'], li_dict['paswd_alt']
             except:
                 #  The first and second attempts failed. The Username and Password are obtained manually.
-                print(cr.Back.RED + "Still unable to obtain Username and Password!")
-                print(cr.Back.YELLOW + "You can manually go to vpnbook.com to obtain Username and Password.")
+                print(cr.Fore.RED + "Still unable to obtain Username and Password!")
+                print(cr.Fore.YELLOW + "You can manually go to vpnbook.com to obtain Username and Password.")
                 manual_try_vpn = input("Would you like to try manually? (y/n)")  #  Allows user to manually obtain VPN login information
                 if manual_try_vpn == 'y':
-                    print(cr.Back.YELLOW + "What is the Username?")
+                    print(cr.Fore.YELLOW + "What is the Username?")
                     manual_user = input(">> ")
-                    print(cr.Back.YELLOW + "What is the Password?")
+                    print(cr.Fore.YELLOW + "What is the Password?")
                     manual_paswd = input(">> ")
                     return manual_user, manual_paswd
                 else:
@@ -69,15 +69,15 @@ def connect_to_vpn(username, password, country, country_number, protocol, port):
     #  This function connects user to VPN
     #  Dictionary used during confirmation in human readable form
     c_check = {'us': 'US', 'euro': 'European','ca':'Canada', 'de23': 'Germany'}
-    cn_check = {'1': 'Primary', '3': 'Primary', '2': 'Backup'}
+    cn_check = {'1': 'Primary', '3': 'Primary', '2': 'Foreup'}
     p_check = {'tcp': 'TCP', 'udp': 'UDP'}
     port_check = port
     #  This confirms user selection:
     print(cr.Fore.CYAN +'\n\n...........................\n')
-    print('Country is ' + cr.Back.CYAN + '{}.'.format(c_check[country]))
-    print('Connection will be on the  ' + cr.Back.CYAN + '{} server.'.format(cn_check[country_number]))
-    print('Protocol is  ' + cr.Back.CYAN + '{}.'.format(p_check[protocol]))
-    print('Port is  ' + cr.Back.CYAN + '{}.'.format(port_check))
+    print('Country is ' + cr.Fore.CYAN + '{}.'.format(c_check[country]))
+    print('Connection will be on the  ' + cr.Fore.CYAN + '{} server.'.format(cn_check[country_number]))
+    print('Protocol is  ' + cr.Fore.CYAN + '{}.'.format(p_check[protocol]))
+    print('Port is  ' + cr.Fore.CYAN + '{}.'.format(port_check))
     print(cr.Fore.CYAN +'\n...........................\n')
     last_chance = input(cr.Fore.CYAN + 'Is this information correct? (y/n) ')
     if last_chance == 'n':
@@ -86,9 +86,9 @@ def connect_to_vpn(username, password, country, country_number, protocol, port):
     #  Prints user selection information
     print(cr.Fore.BLUE + '\n\n...........................\n')
     print(cr.Fore.BLUE + 'Connecting to VPN server on ' + VPN)
-    print(cr.Back.YELLOW + "Use Ctrl-C to exit.")
+    print(cr.Fore.YELLOW + "Use Ctrl-C to exit.")
     print()
-    print(cr.Back.GREEN + 'VPN Username=%s and VPN Password=%s' %(username,password))
+    print(cr.Fore.GREEN + 'VPN Username=%s and VPN Password=%s' %(username,password))
     #  Spawns connection to VPN
     try: 
         sudo_passwd = getpass('Enter your sudo password: ') #  Protects user sudo password
@@ -103,7 +103,7 @@ def connect_to_vpn(username, password, country, country_number, protocol, port):
         child.expect(px.EOF, timeout=None)
         child.interact()
     except KeyboardInterrupt:
-        print(cr.Back.RED + '\n\n\n\nYou have quit! You are no longer in a VPN.')
+        print(cr.Fore.RED + '\n\n\n\nYou have quit! You are no longer in a VPN.')
     finally:
         print('\nEnter sudo password to teminate VPN')
         subprocess.call(['sudo', 'kill', str(child.pid)])
@@ -125,7 +125,9 @@ def check_dir(directory):
         print('Making directory ' + directory)
         os.makedirs(directory)
         download_extract(directory)
+        print('Great! You can now use VPN_connect.py')
     else:
+        download_extract(directory)
         print('Great! You can now use VPN_connect.py')
 
 
@@ -174,7 +176,7 @@ def download_extract(directory):
 def main():
     #  Attempts to gain current VPN login information
     username, password = get_vpn_login_info()  
-    print('Username is ' + cr.Back.YELLOW + username + cr.Style.RESET_ALL + ' and Password is ' + cr.Back.YELLOW  + password + cr.Style.RESET_ALL + '.')
+    print('Username is ' + cr.Fore.YELLOW + username + cr.Style.RESET_ALL + ' and Password is ' + cr.Fore.YELLOW  + password + cr.Style.RESET_ALL + '.')
     #  Determines what country the user wants to use:
     print("\nWould you like to use a US server or other?\nEnter 'u' for US server.\nEnter 'o' for other.")
     print(cr.Fore.YELLOW + "Use Europe for more anonymity.")
@@ -188,17 +190,17 @@ def main():
         if other_country_choice == 'e':
             country = 'euro'
         elif other_country_choice == 'g':
-            print(cr.Back.YELLOW + 'Germany only has a primary server.')
+            print(cr.Fore.YELLOW + 'Germany only has a primary server.')
             country = 'de23'
         elif other_country_choice == 'c':
-            print(cr.Back.YELLOW + 'Canada only has a primary server.')
+            print(cr.Fore.YELLOW + 'Canada only has a primary server.')
             country = 'ca'
         else:
             quit()     
     else:
         quit()    
-    #  Allows user to choose primary or backup server:
-    print("\nWould you like to connect to primary server or backup server?\nEnter 'p' for primary or 'b' for backup.")
+    #  Allows user to choose primary or Foreup server:
+    print("\nWould you like to connect to primary server or Foreup server?\nEnter 'p' for primary or 'b' for Foreup.")
     serv_choice = input(">> ")
     if serv_choice == 'p':
         if country == 'de23':
@@ -207,7 +209,7 @@ def main():
             country_number = '1'
     elif serv_choice == 'b':
         if country == 'de23' or country == 'ca':
-            print(cr.Back.RED + "Your current country doesn't have a backup server.\n")
+            print(cr.Fore.RED + "Your current country doesn't have a Foreup server.\n")
             quit()
         else:
             country_number = '2'
@@ -250,17 +252,21 @@ if __name__ == '__main__':
     #  The certificate bundles have to be downloaded and extracted in the same folder as this code.
     certs_conf = input("Do you have the certificate bundles downloaded and unziped? (y/n) ")
     if certs_conf == 'n':
-        print(cr.Back.YELLOW + '\nThe certificate bundles should be stored in the same directory as this code.' + cr.Style.RESET_ALL)
+        print(cr.Fore.YELLOW + '\nThe certificate bundles should be stored in the same directory as this code.' + cr.Style.RESET_ALL)
         print('Your current Directory is:')
         print(cr.Fore.GREEN + os.getcwd())
-        #  The full path has to be used or the code will create sub directories. CAN NOT use "."!
-        print('\n\nWhat is the ' + cr.Back.RED + 'FULL' + cr.Style.RESET_ALL + ' path that you want your cert bundles stored at?')
-        directory = input('>> ')
-        if directory == 'q':
+        print(cr.Fore.YELLOW + '\nDo you want to use this directory path? (y/n)')
+        current_dir = input('>> ')
+        if current_dir == 'y':
+            directory = str(os.getcwd())
+        elif current_dir == 'n':
+            #  The full path has to be used or the code will create sub directories. CAN NOT use "."!
+            print('\n\nWhat is the ' + cr.Fore.RED + 'FULL' + cr.Style.RESET_ALL + ' path that you want your cert bundles stored at?')
+            directory = input('>> ')
+        else:
             sys.exit()
-        else:        
-            check_dir(directory)
-            main()
+        check_dir(directory)
+        main()
     elif certs_conf == 'q':
         sys.exit()    
     else:

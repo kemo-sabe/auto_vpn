@@ -27,4 +27,11 @@ PYTHON THIRD PARTY LIBRARIES USED:
 - bs4
 - colorama
 
+TO INSTALL THESE LIBRARIES, PIP IS THE BEST WAY:
+
+sudo pip3 install requests
+sudo pip3 install bs4
+sudo pip3 install colorama
+
+	
 PLEASE CONTRIBUTE ANY ADDITIONS/SUGGESTIONS TO THE CODE. IF IT IS USEFUL, PAY IT FORWARD.
