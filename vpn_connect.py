@@ -69,7 +69,7 @@ def connect_to_vpn(username, password, country, country_number, protocol, port):
     #  This function connects user to VPN
     #  Dictionary used during confirmation in human readable form
     c_check = {'us': 'US', 'euro': 'European','ca':'Canada', 'de23': 'Germany'}
-    cn_check = {'1': 'Primary', '3': 'Primary', '2': 'Foreup'}
+    cn_check = {'1': 'Primary', '3': 'Primary', '2': 'Backup'}
     p_check = {'tcp': 'TCP', 'udp': 'UDP'}
     port_check = port
     #  This confirms user selection:
@@ -199,8 +199,8 @@ def main():
             quit()     
     else:
         quit()    
-    #  Allows user to choose primary or Foreup server:
-    print("\nWould you like to connect to primary server or Foreup server?\nEnter 'p' for primary or 'b' for Foreup.")
+    #  Allows user to choose primary or Backup server:
+    print("\nWould you like to connect to primary server or Backup server?\nEnter 'p' for primary or 'b' for Backup.")
     serv_choice = input(">> ")
     if serv_choice == 'p':
         if country == 'de23':
@@ -209,7 +209,7 @@ def main():
             country_number = '1'
     elif serv_choice == 'b':
         if country == 'de23' or country == 'ca':
-            print(cr.Fore.RED + "Your current country doesn't have a Foreup server.\n")
+            print(cr.Fore.RED + "Your current country doesn't have a Backup server.\n")
             quit()
         else:
             country_number = '2'

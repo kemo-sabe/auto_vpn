@@ -33,5 +33,9 @@ TO INSTALL THESE LIBRARIES, PIP IS THE BEST WAY:
 - sudo pip3 install bs4
 - sudo pip3 install colorama
 
+MANJARO (and assuming Arch Linux distributions), THE LXML LIBRARY IS NEEDED:
+
+- sudo pip3 install lxml
+
 	
 PLEASE CONTRIBUTE ANY ADDITIONS/SUGGESTIONS TO THE CODE. IF IT IS USEFUL, PAY IT FORWARD.
