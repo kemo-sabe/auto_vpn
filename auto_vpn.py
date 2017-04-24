@@ -10,7 +10,7 @@ import pexpect as px
 import colorama as cr
 import zipfile as zp
 
-longstring = """\
+introAscii = """\
        /\                                                               
       /++\                       |                                                          
      /++  \                  ____|____    ______                                                 
@@ -273,7 +273,7 @@ def main():
 if __name__ == '__main__':
     cr.init(autoreset=True)
     #  Introduction
-    print('\n\n' + longstring + '\n\n')
+    print('\n\n' + introAscii + '\n\n')
     print("\nWelcome to a free VPN connection tool!\nThis tool will connect you to a VPN server.\n")  
     #  The certificate bundles have to be downloaded and extracted in the same folder as this code.
     certs_conf = input("Do you have the certificate bundles downloaded and unziped? (y/n) ")
