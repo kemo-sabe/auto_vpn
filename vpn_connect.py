@@ -5,9 +5,29 @@ import sys, requests, signal, subprocess, os
 import urllib.request
 from bs4 import BeautifulSoup
 from getpass import getpass
+from selenium import webdriver
 import pexpect as px
 import colorama as cr
 import zipfile as zp
+
+longstring = """\
+       /\                                                               
+      /++\                       |                                                          
+     /++  \                  ____|____    ______                                                 
+    /______\       |+     |+     |++++   |++++++|+                                           
+   /+++++   \      |++    |++    |++     |+++   |++                             
+  /++++      \     |++    |++    |++     |++    |++                                     
+ /+++         \    |++    |++    |++     |+     |++                              
+/++            \   |______|++    |+______|______|++ ...ish                                                    
+                \            /+   |++++++|    |\      |+                              
+                 \          /++   |++++  |    |+\     |++                         
+                  \        /++    |______|    |++\    |++                         
+                   \      /++     |++++++     |++ \   |++                    
+                    \    /++      |++++       |++  \  |++                           
+                     \  /++       |++         |++   \ |++              
+                      \/++        |++         |++    \|++                 
+                       +                                          
+"""
 
 def get_vpn_login_info():
     #  This function gathers the current username and password from vpnbook.com and returns them
@@ -56,6 +76,11 @@ def get_vpn_login_info():
                 print(cr.Fore.YELLOW + "You can manually go to vpnbook.com to obtain Username and Password.")
                 manual_try_vpn = input("Would you like to try manually? (y/n)")  #  Allows user to manually obtain VPN login information
                 if manual_try_vpn == 'y':
+                    #  Opens browser to obtain username and password
+                    print('Opening vpnbook website...')
+                    driver = webdriver.Firefox()
+                    driver.get(url)
+                    #  Manual username and password inputs
                     print(cr.Fore.YELLOW + "What is the Username?")
                     manual_user = input(">> ")
                     print(cr.Fore.YELLOW + "What is the Password?")
@@ -92,7 +117,7 @@ def connect_to_vpn(username, password, country, country_number, protocol, port):
     #  Spawns connection to VPN
     try: 
         sudo_passwd = getpass('Enter your sudo password: ') #  Protects user sudo password
-        child = px.spawnu('sudo', ['openvpn', '--config', VPN])
+        child = px.spawnu('sudo', ['openvpn', '--auth-nocache', '--config', VPN])
         child.waitnoecho()
         child.sendline(str(sudo_passwd))
         child.waitnoecho()
@@ -248,6 +273,7 @@ def main():
 if __name__ == '__main__':
     cr.init(autoreset=True)
     #  Introduction
+    print('\n\n' + longstring + '\n\n')
     print("\nWelcome to a free VPN connection tool!\nThis tool will connect you to a VPN server.\n")  
     #  The certificate bundles have to be downloaded and extracted in the same folder as this code.
     certs_conf = input("Do you have the certificate bundles downloaded and unziped? (y/n) ")
