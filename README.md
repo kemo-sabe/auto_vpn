@@ -44,18 +44,17 @@ This script is built with the following settings/prerequisites in mind:
 - selenium (version > 3.4)
 >"Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it’s in your PATH, e. g., place it in /usr/bin or /usr/local/bin." -pypi documentation
 
-[Click here to see the latest geckodriver releases](https://github.com/mozilla/geckodriver/releases)
-
+[Click here to see the latest geckodriver releases](https://github.com/mozilla/geckodriver/releases)  
 [geckodriver version 16.0](https://github.com/mozilla/geckodriver/releases/download/v0.16.0/geckodriver-v0.16.0-win64.zip)
 
 
 To install these libraries using pip:
 
-`sudo pip3 install selenium`
-`sudo pip3 install requests`
-`sudo pip3 install bs4`
-`sudo pip3 install colorama`
-`sudo pip3 install lxml`
+`sudo pip3 install selenium`  
+`sudo pip3 install requests`  
+`sudo pip3 install bs4`  
+`sudo pip3 install colorama`  
+`sudo pip3 install lxml`  
 
 ---
 
