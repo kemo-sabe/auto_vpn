@@ -1,5 +1,5 @@
 # ABOUT
-This is a simple python script that connects a user to a vpn server. The vpn service that is used for this script is vpnbook.com. 
+This is a simple python script that connects a user to a vpn server. The vpn service that is used for this script is vpnbook.com.
 
 ## About VPNBOOK
 
@@ -13,11 +13,11 @@ This is a simple python script that connects a user to a vpn server. The vpn ser
 ---
 
 # Installation
-1. Install required libraries.
-2. "cd" into desired directory.
-2. Clone this repository.
+1. Clone this repository.
 `git clone https://github.com/kemo-sabe/auto_vpn`
-3. After clone:
+2. Install libraries.
+`pip install -r requirements.txt`
+3. Change script to be executable:
 `chmod +x vpn_connect.py`
 
 ---
@@ -25,7 +25,7 @@ This is a simple python script that connects a user to a vpn server. The vpn ser
 # Additional information
 This script is built with the following settings/prerequisites in mind:
 
-- PYTHON 3 (PYTHON 3.5.2 was used during coding/testing)
+- PYTHON 3 (PYTHON 3+ was used during coding/testing)
 - 64-bit LINUX SYSTEM (tested on UBUNTU and MANJARO)
 - VPN USERNAME and PASSWORD is scrapped off website and is subject to change depending on website redesign.
 
@@ -33,42 +33,26 @@ This script is built with the following settings/prerequisites in mind:
 
 ## PYTHON Library Information
 
-### Third Party Libraries 
+### Third Party Libraries
 
 **Must be installed for the script to work!**
 
-- requests
-- bs4
-- lxml
 - colorama
-- selenium (version > 3.4)
->"Selenium requires a driver to interface with the chosen browser. Firefox, for example, requires geckodriver, which needs to be installed before the below examples can be run. Make sure it’s in your PATH, e. g., place it in /usr/bin or /usr/local/bin." -pypi documentation
-
-[Click here to see the latest geckodriver releases](https://github.com/mozilla/geckodriver/releases)  
-[geckodriver version 16.0](https://github.com/mozilla/geckodriver/releases/download/v0.16.0/geckodriver-v0.16.0-linux64.tar.gz)
-
-
-To install these libraries using pip:
-
-`sudo pip3 install selenium`  
-`sudo pip3 install requests`  
-`sudo pip3 install bs4`  
-`sudo pip3 install colorama`  
-`sudo pip3 install lxml`  
+- bs4
+- requests
 
 ---
 
 ### PYTHON Standard Libraries Used
 
-- sys
 - getpass
-- pexpect
 - os
+- pexpect
 - signal
 - subprocess
-- urllib.request
+- sys
 - zipfile
 
 ---
-	
+
 **PLEASE CONTRIBUTE ANY ADDITIONS/SUGGESTIONS TO THE CODE. IF IT IS USEFUL, PAY IT FORWARD.**
