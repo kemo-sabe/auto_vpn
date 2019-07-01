@@ -1,5 +1,5 @@
 # ABOUT
-This is a simple python script that connects a user to a vpn server. The vpn service that is used for this script is vpnbook.com.
+This is a simple python script that connects a user to a vpn server. The vpn service that is used for this script is vpnbook.com. A simpler version is being worked on.
 
 ## About VPNBOOK
 
@@ -13,6 +13,8 @@ This is a simple python script that connects a user to a vpn server. The vpn ser
 ---
 
 # Installation
+1. Install tesseract. This depends on distribution, but an example is
+`sudo apt install tesseract-ocr`
 1. Clone this repository.
 `git clone https://github.com/kemo-sabe/auto_vpn`
 2. Install libraries.
@@ -39,6 +41,8 @@ This script is built with the following settings/prerequisites in mind:
 
 - colorama
 - bs4
+- Pillow
+- pytesseract
 - requests
 
 ---
@@ -46,11 +50,14 @@ This script is built with the following settings/prerequisites in mind:
 ### PYTHON Standard Libraries Used
 
 - getpass
+- math
 - os
 - pexpect
+- re
 - signal
 - subprocess
 - sys
+- webbrowser
 - zipfile
 
 ---
