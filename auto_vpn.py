@@ -4,8 +4,11 @@
 from bs4 import BeautifulSoup
 import colorama as cr
 from getpass import getpass
+import math
 import os
 import pexpect as px
+from PIL import Image
+import pytesseract
 import re
 import requests
 import subprocess
@@ -66,15 +69,22 @@ def get_vpn_login_info():
         user = ''
         paswd = ''
         all_strong = soup.find_all('strong')
+        img_count = 0
         for txt in all_strong:
             if txt.text[:4] == 'User':
                 if user == '':
                     user = txt.text.replace('Username: ', '')
                     print(cr.Fore.GREEN + 'Current Username obtained!!')
             if txt.text[:4] == 'Pass':
-                if paswd == '':
-                    paswd = txt.text.replace('Password: ', '')
-                    print(cr.Fore.GREEN + 'Current Password obtained!!')
+                if img_count == 0:
+                    image_php = txt.img['src']
+                    # image_url = f'{URL}/{image_php}'
+                    image_request = requests.get(f'{URL}/{image_php}', headers=HEADER).content
+                    with open('pass_image.png', 'wb') as f:
+                        f.write(image_request)
+                    img_count += 1
+                    if paswd == '':
+                        paswd = image_handle('pass_image.png')
         print(cr.Fore.GREEN + '\n...........................\n')
         return user, paswd
     except:
@@ -160,6 +170,24 @@ def quit():
     else:
         sys.exit()
 
+def image_handle(image, canvas_width=110, canvas_height=30):
+    white = (255,255,255)
+    image2 = 'pass_image_resized.png'
+
+    im = Image.open(image)
+
+    original_width, original_height = im.size
+    x1 = int(math.floor((canvas_width - original_width) / 2))
+    y1 = int(math.floor((canvas_height - original_height) / 2))
+
+    new_image = Image.new("RGB", (canvas_width, canvas_height), white)
+    new_image.paste(im, (x1, y1, x1 + original_width, y1 + original_height))
+    new_image.save(image2)
+
+    im2 = Image.open(image2)
+    text = pytesseract.image_to_string(im2, config='')
+    print(cr.Fore.GREEN + 'Current Password obtained!!')
+    return text
 
 def check_dir(directory):
     #  This checks to see if certificate bundle directory exits
